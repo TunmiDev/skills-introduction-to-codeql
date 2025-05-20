@@ -28,3 +28,10 @@ def index():
         books = [Book(*row) for row in cursor]
         
     return render_template('books.html', books=books)
+    # Add this at the very bottom of routes.py
+
+def get_user_data(username):
+    # ⚠️ Vulnerable to SQL Injection — for CodeQL testing only
+    query = "SELECT * FROM users WHERE name = '" + username + "'"
+    cursor.execute(query)
+
