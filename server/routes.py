@@ -28,3 +28,11 @@ def index():
         books = [Book(*row) for row in cursor]
         
     return render_template('books.html', books=books)
+    def get_user_data(username):
+    import sqlite3
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    # ⚠️ This is an insecure query vulnerable to SQL injection
+    query = "SELECT * FROM users WHERE name = '" + username + "'"
+    cursor.execute(query)
+
